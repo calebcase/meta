@@ -13,7 +13,7 @@ The top level command can be setup by simply symlinking to `/usr/bin/meta`. For
 example, this creates a new top level `hello` command:
 
 ```
-$ go install github.com/calebcase/meta
+$ go install github.com/calebcase/meta@latest
 $ ln -s "$(which meta)" ~/bin/hello
 ```
 
