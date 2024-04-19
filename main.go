@@ -13,7 +13,7 @@ import (
 )
 
 type Config struct {
-	Separator     string `env:"META_SEP" env-default:"_"`
+	Separator     string `env:"META_SEP"        env-default:"_"`
 	SubCommandMax int    `env:"META_SUBCMD_MAX" env-default:"1"`
 }
 
@@ -40,7 +40,7 @@ type Cmd struct {
 }
 
 func GetBlurb(path string) string {
-	output, err := exec.Command(path, "--help-blurb").Output()
+	output, err := exec.Command(path + "-help").Output()
 	if err != nil {
 		return ""
 	}
@@ -91,7 +91,15 @@ func GenUsage(prefix string) (usage []string) {
 		usage = append(usage, "", "Commands:")
 
 		for subbase, cmd := range cmds {
-			usage = append(usage, fmt.Sprintf("  %s %s\t%s", Name(prefix).Decode(), Name(subbase).Decode(), cmd.Blurb))
+			usage = append(
+				usage,
+				fmt.Sprintf(
+					"  %s %s\t%s",
+					Name(prefix).Decode(),
+					Name(subbase).Decode(),
+					cmd.Blurb,
+				),
+			)
 		}
 	}
 
